@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jasongardnerlv/wct-junit.git"
+    "url": "git://github.com/jasongardnerlv/wct-junit.git"
   },
   "wct-plugin": {
     "cli-options": {}
@@ -28,3 +28,4 @@
     }
   ],
 }
+
