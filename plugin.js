@@ -62,7 +62,7 @@ module.exports = function(wct, pluginOptions, plugin) {
           var config = {
             testcase: [{
               _attr: {
-                name: test.title,
+                name: test.suite + ' - ' + test.title,
                 time: (typeof test.duration === 'undefined') ? 0 : test.duration / 1000,
                 classname: test.suite
               }
