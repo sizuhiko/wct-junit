@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var md5 = require('md5');
+var sanitize = require("sanitize-filename");
 
 module.exports = function(wct, pluginOptions, plugin) {
   console.log('starting wct junit plugin');
@@ -77,7 +78,7 @@ module.exports = function(wct, pluginOptions, plugin) {
       }
     }
     var xmlData = xml({testsuites:testSuites},{declaration:true,indent:'  '});
-    var filePath = 'junit.xml';
+    var filePath = sanitize('junit-' + browser.browserName + '.xml');
     if (outputDir) {
       filePath = path.join(outputDir, filePath);
     }
