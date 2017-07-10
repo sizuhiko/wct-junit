@@ -77,7 +77,7 @@ module.exports = function(wct, pluginOptions, plugin) {
           testSuite.testsuite.push(config);
         });
         testSuites.push(testSuite);
-        checksum = crc32(reporter.tests[0].suite, checksum);
+        checksum = crc32.str(reporter.tests[0].suite, checksum);
       }
     }
     var xmlData = xml({testsuites:testSuites},{declaration:true,indent:'  '});
