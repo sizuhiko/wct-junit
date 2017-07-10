@@ -4,6 +4,7 @@ var path = require('path');
 var mkdirp = require('mkdirp');
 var md5 = require('md5');
 var sanitize = require("sanitize-filename");
+var crc32 = require("crc32");
 
 module.exports = function(wct, pluginOptions, plugin) {
   console.log('starting wct junit plugin');
@@ -41,6 +42,7 @@ module.exports = function(wct, pluginOptions, plugin) {
 
   wct.on('browser-end', function(browser, error, stats) {
     var testSuites = [];
+    var checksum = undefined;
     for (var fileName in reporters[browser.id]) {
       if (reporters[browser.id].hasOwnProperty(fileName)) {
         var reporter = reporters[browser.id][fileName];
@@ -75,10 +77,11 @@ module.exports = function(wct, pluginOptions, plugin) {
           testSuite.testsuite.push(config);
         });
         testSuites.push(testSuite);
+        checksum = crc32(reporter.tests[0].suite, checksum);
       }
     }
     var xmlData = xml({testsuites:testSuites},{declaration:true,indent:'  '});
-    var filePath = sanitize('junit-' + browser.browserName + '.xml');
+    var filePath = sanitize('junit-' + browser.browserName + '-' + checksum + '.xml');
     if (outputDir) {
       filePath = path.join(outputDir, filePath);
     }
