@@ -4,7 +4,7 @@ var path = require('path');
 var mkdirp = require('mkdirp');
 var md5 = require('md5');
 var sanitize = require("sanitize-filename");
-var crc32 = require("crc32");
+var crc32 = require("crc-32");
 
 module.exports = function(wct, pluginOptions, plugin) {
   console.log('starting wct junit plugin');
